@@ -34,6 +34,9 @@ public class Users implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tasks> tasks = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Roles role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

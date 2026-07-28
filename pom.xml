@@ -43,14 +43,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <!-- JJWT API -->
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
             <version>0.11.5</version>
         </dependency>
 
-        <!-- JJWT Impl -->
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
@@ -58,7 +58,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- JJWT Jackson (JSON dönüşümleri için) -->
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
@@ -81,6 +81,12 @@
             <artifactId>spring-boot-starter-data-jpa-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.5.5.Final</version> <!-- Veya güncel bir sürüm -->
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security-test</artifactId>
