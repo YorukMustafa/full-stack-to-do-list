@@ -47,13 +47,30 @@ public class AuthService implements IAuthService {
 
     @Override
     public DtoUsers register(AuthRequest request) {
+        if (iUsersRepository.existsByUsername(request.getUsername())) {
+            throw new RuntimeException("Bu kullanıcı adı zaten kullanılıyor!");
+        }
+        if (request.getEmail() != null && !request.getEmail().isBlank() && iUsersRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("Bu e-posta adresi zaten kullanılıyor!");
+        }
+
         Users user = userMapper.requestToEntity(request);
         user.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
         user.setEmail(request.getEmail());
 
-        Roles role = iRolesRepository.findById(2L)
-                .orElseThrow(() -> new RuntimeException("Rol bulunamadı!"));
-        user.setRole(role);
+        try {
+            Roles role = iRolesRepository.findByName("USER")
+                    .orElseGet(() -> iRolesRepository.findByName("ROLE_USER")
+                            .orElseGet(() -> iRolesRepository.findById(1L)
+                                    .orElseGet(() -> {
+                                        Roles defaultRole = new Roles();
+                                        defaultRole.setName("USER");
+                                        return iRolesRepository.save(defaultRole);
+                                    })));
+            user.setRole(role);
+        } catch (Exception e) {
+            System.err.println("Role assignment failed: " + e.getMessage());
+        }
 
         Users savedUser = iUsersRepository.save(user);
 

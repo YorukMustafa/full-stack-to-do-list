@@ -1,10 +1,6 @@
 package com.mustafayoruk.todolistfullstack.entitys;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -12,6 +8,7 @@ import lombok.Data;
 @Table(name = "roles")
 public class Roles {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false,  length = 50)

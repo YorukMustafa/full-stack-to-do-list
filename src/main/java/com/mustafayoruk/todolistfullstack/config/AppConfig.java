@@ -22,7 +22,7 @@ public class AppConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> iUsersRepository.findUsersByName(username)
+        return username -> iUsersRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Kullanıcı bulunamadı"));
     }
 
